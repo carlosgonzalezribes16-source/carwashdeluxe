@@ -1,235 +1,287 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Deluxe Car Wash Valencia</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(180deg, #0d0d0d 0%, #1a1a1a 100%);
-      color: #f5f5f5;
-    }
-    header {
-      background: linear-gradient(90deg, #001f3f, #005f99);
-      padding: 1rem 2rem;
-      text-align: center;
-      color: #fff;
-      box-shadow: 0 0 15px rgba(0,0,0,0.6);
-    }
-    h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-shadow: 0 0 8px rgba(0,153,255,0.8);
-    }
-    nav {
-      display: flex;
-      justify-content: center;
-      margin-top: 0.5rem;
-    }
-    nav button {
-      background: none;
-      border: none;
-      color: #fff;
-      margin: 0 1rem;
-      font-size: 1.1rem;
-      cursor: pointer;
-      position: relative;
-    }
-    nav button::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -4px;
-      width: 100%;
-      height: 2px;
-      background: #0099ff;
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-    nav button:hover::after {
-      transform: scaleX(1);
-    }
-    .tab {
-      display: none;
-      padding: 2rem;
-      animation: fade 0.5s ease;
-    }
-    .active { display: block; }
-    @keyframes fade {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-    .servicios {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-    .card {
-      background: #111;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 0 15px rgba(0,153,255,0.4);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 25px rgba(0,153,255,0.7);
-    }
-    .card h3 {
-      color: #00aaff;
-      margin-top: 0;
-    }
-    .card p { line-height: 1.4; }
-    .card button {
-      margin-top: 1rem;
-      background: linear-gradient(90deg, #0077cc, #00aaff);
-      border: none;
-      color: #fff;
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 1rem;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card button:hover {
-      background: linear-gradient(90deg, #0099ff, #33ccff);
-      box-shadow: 0 0 12px rgba(0,153,255,0.8);
-    }
-    form {
-      max-width: 500px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      background: #111;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(0,153,255,0.5);
-    }
-    form input, form select {
-      padding: 0.6rem;
-      border: 1px solid #333;
-      border-radius: 6px;
-      background: #222;
-      color: #fff;
-      font-size: 1rem;
-    }
-    form button {
-      background: linear-gradient(90deg, #0077cc, #00aaff);
-      border: none;
-      padding: 0.8rem;
-      border-radius: 6px;
-      font-size: 1rem;
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    form button:hover {
-      background: linear-gradient(90deg, #0099ff, #33ccff);
-      box-shadow: 0 0 15px rgba(0,153,255,0.7);
-    }
-    #mensaje { margin-top: 1rem; font-weight: bold; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Deluxe Car Wash Valencia · Reservas</title>
+<style>
+  :root{
+    --bg:#0b0e14; --panel:#0f1420; --ink:#eaf2ff; --muted:#9db0d2;
+    --blue:#2aa0ff; --blue2:#0f6bff; --cyan:#33d6ff; --stroke:#1b2740;
+    --ok:#86f4b5; --err:#ff7b7b;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 800px at 12% -10%, #0e1626 0%, transparent 60%),
+      linear-gradient(180deg, #0b0e14 0%, #0b0e14 100%);
+  }
+  .wrap{max-width:1100px;margin:32px auto;padding:0 16px}
+  header{display:flex;gap:14px;align-items:center;margin-bottom:20px}
+  .logo{width:44px;height:44px;border-radius:12px;background:conic-gradient(from 230deg,#2aa0ff,#0f6bff,#2aa0ff);box-shadow:0 10px 40px rgba(47,140,255,.35)}
+  h1{margin:0;font-size:24px}
+  .sub{color:var(--muted);font-size:13px}
+  .tabs{background:var(--panel);border:1px solid var(--stroke);border-radius:16px;box-shadow:0 12px 36px rgba(0,0,0,.35)}
+  .tabbar{display:flex;gap:8px;padding:8px;background:#0c111c;border-bottom:1px solid var(--stroke);border-radius:16px 16px 0 0}
+  .tabbar button{flex:1;background:transparent;border:1px solid transparent;color:var(--muted);padding:10px 12px;border-radius:10px;font-weight:600;cursor:pointer}
+  .tabbar button.active{color:var(--ink);background:linear-gradient(180deg,#0f1726,#0c1421);border-color:#0c2242;box-shadow:inset 0 0 0 1px #15345f, 0 0 18px rgba(47,140,255,.25)}
+  .panel{display:none;padding:16px}
+  .panel.active{display:block}
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media (max-width:980px){.services{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:680px){.services{grid-template-columns:1fr}}
+  .svc{background:linear-gradient(180deg,#0f1626,#0c121f);border:1px solid var(--stroke);border-radius:14px;transition:transform .18s ease, box-shadow .2s ease;position:relative;overflow:hidden}
+  .svc:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(0,0,0,.35)}
+  .svc .body{padding:16px}
+  .svc h3{margin:0 0 6px;font-size:16px}
+  .meta{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 10px}
+  .chip{display:inline-flex;gap:8px;align-items:center;background:#0b1424;border:1px solid #14233f;border-radius:999px;padding:7px 10px;font-size:12px;color:#bcd0f0}
+  .svc p{margin:0;color:#cfe2ff;font-size:14px;line-height:1.55}
+  .pick{margin-top:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .btn{appearance:none;border:0;padding:12px 14px;border-radius:12px;font-weight:700;cursor:pointer}
+  .btn.primary{background:linear-gradient(180deg,var(--blue),var(--blue2));color:#061324;box-shadow:0 8px 24px rgba(47,140,255,.35), inset 0 -2px 0 rgba(0,0,0,.2)}
+  .btn.primary:hover{transform:translateY(-1px);box-shadow:0 12px 32px rgba(47,140,255,.45)}
+  .btn.ghost{background:transparent;border:1px solid var(--stroke);color:var(--ink)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media (max-width:900px){.grid{grid-template-columns:1fr}}
+  .card{background:linear-gradient(180deg,#0f1626,#0c121f);border:1px solid var(--stroke);border-radius:14px}
+  .card .body{padding:16px}
+  label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+  input,select{width:100%;padding:12px 14px;border-radius:12px;background:#0a1019;border:1px solid #172034;color:var(--ink);outline:none}
+  input:focus,select:focus{border-color:#2d8cff;box-shadow:0 0 0 3px rgba(45,140,255,.15)}
+  .row{display:flex;gap:14px}
+  .row>div{flex:1}
+  .status{padding:14px 16px;border-top:1px solid var(--stroke);border-radius:0 0 16px 16px;display:none}
+  .status.show{display:block}
+  .ok{color:var(--ok)} .err{color:var(--err)}
+  footer{margin:22px 0;color:var(--muted);font-size:12px;text-align:center}
+  .help{font-size:12px;color:var(--muted);margin-top:6px}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Deluxe Car Wash Valencia</h1>
-    <nav>
-      <button onclick="openTab('servicios')">Servicios</button>
-      <button onclick="openTab('reservar')">Reservar</button>
-    </nav>
-  </header>
-
-  <section id="servicios" class="tab active">
-    <h2>Servicios disponibles</h2>
-    <div class="servicios">
-      <div class="card">
-        <h3>Lavado Exterior</h3>
-        <p>Duración: 30 min</p>
-        <p>Precio: desde 10 €</p>
-        <button onclick="preselectService('Lavado Exterior')">Elegir y reservar</button>
+  <div class="wrap">
+    <header>
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>Deluxe Car Wash Valencia</h1>
+        <div class="sub">Reserva online · L–V 09:00–19:00 · S 09:00–15:00</div>
       </div>
-      <div class="card">
-        <h3>Lavado Completo</h3>
-        <p>Duración: 60 min</p>
-        <p>Precio: desde 20 €</p>
-        <button onclick="preselectService('Lavado Completo')">Elegir y reservar</button>
+    </header>
+
+    <section class="tabs">
+      <div class="tabbar">
+        <button class="active" data-tab="reservar">Reservar</button>
+        <button data-tab="servicios">Servicios</button>
       </div>
-      <div class="card">
-        <h3>Limpieza Deluxe</h3>
-        <p>Duración: 90 min</p>
-        <p>Precio: desde 35 €</p>
-        <button onclick="preselectService('Limpieza Deluxe')">Elegir y reservar</button>
+
+      <!-- Panel: Reservar -->
+      <div class="panel active" id="reservar">
+        <form id="reservaForm" novalidate>
+          <div class="grid">
+            <div class="card"><div class="body">
+              <div class="row">
+                <div>
+                  <label for="nombre">Nombre completo</label>
+                  <input id="nombre" required placeholder="Ej. Carlos López" />
+                </div>
+                <div>
+                  <label for="telefono">Teléfono (sin espacios ni guiones)</label>
+                  <input id="telefono" inputmode="numeric" placeholder="678987654" required />
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <label for="correo">Correo (opcional)</label>
+                  <input id="correo" type="email" placeholder="tu@email.com" />
+                </div>
+                <div>
+                  <label for="matricula">Matrícula (sin espacios)</label>
+                  <input id="matricula" placeholder="1234ABC" required />
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <label for="modelo">Modelo de coche</label>
+                  <input id="modelo" placeholder="BMW Serie 3" required />
+                </div>
+                <div>
+                  <label for="servicio">Servicio</label>
+                  <select id="servicio" required>
+                    <option value="">Selecciona un servicio…</option>
+                    <option>Lavado Exterior</option>
+                    <option>Lavado Interior</option>
+                    <option>Lavado Completo</option>
+                    <option>Lavado con Cera</option>
+                    <option>Limpieza Deluxe</option>
+                    <option>Restauración de Faros</option>
+                    <option>Limpieza de Tapicería</option>
+                    <option>Pulimento de Carrocería</option>
+                    <option>Lavado de Motos</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div>
+                  <label for="fecha">Fecha (YYYY/MM/DD)</label>
+                  <input id="fecha" placeholder="2025/09/15" required pattern="\\d{4}\\/(0[1-9]|1[0-2])\\/(0[1-9]|[12]\\d|3[01])" />
+                  <div class="help">Formato requerido: <b>YYYY/MM/DD</b></div>
+                </div>
+                <div>
+                  <label for="hora">Hora (HH:MM)</label>
+                  <input id="hora" placeholder="16:30" required pattern="^([01]\\d|2[0-3]):[0-5]\\d$" />
+                  <div class="help">Formato requerido: <b>HH:MM</b> (24h)</div>
+                </div>
+              </div>
+              <div class="row" style="margin-top:8px">
+                <button class="btn primary" type="submit">Reservar</button>
+                <button class="btn ghost" type="reset">Limpiar</button>
+              </div>
+            </div></div>
+
+            <div class="card"><div class="body">
+              <div class="chip">Horario: L–V 09:00–19:00 · S 09:00–15:00 · D cerrado</div>
+              <p class="sub" style="margin-top:10px">La duración se calcula según el servicio y te confirmaremos por WhatsApp.</p>
+              <div id="resumenServicio" class="sub"></div>
+            </div></div>
+          </div>
+        </form>
+        <div id="status" class="status"></div>
       </div>
-    </div>
-  </section>
 
-  <section id="reservar" class="tab">
-    <h2>Reserva tu cita</h2>
-    <form id="formReserva">
-      <input type="text" id="nombre" placeholder="Nombre" required />
-      <input type="text" id="telefono" placeholder="Teléfono (sin espacios ni guiones)" required />
-      <input type="email" id="correo" placeholder="Correo (opcional)" />
-      <input type="text" id="matricula" placeholder="Matrícula" required />
-      <input type="text" id="modelo" placeholder="Modelo del coche" required />
-      <select id="servicio" required>
-        <option value="">Selecciona un servicio</option>
-        <option>Lavado Exterior</option>
-        <option>Lavado Interior</option>
-        <option>Lavado Completo</option>
-        <option>Lavado con Cera</option>
-        <option>Limpieza Deluxe</option>
-        <option>Restauración de Faros</option>
-        <option>Limpieza de Tapicería</option>
-        <option>Pulimento de Carrocería</option>
-        <option>Lavado de Motos</option>
-      </select>
-      <input type="text" id="fecha" placeholder="Fecha (ej: 15/09/2025 o viernes que viene)" required />
-      <input type="text" id="hora" placeholder="Hora (ej: 16:30 o cuatro y media)" required />
-      <button type="submit">Enviar reserva</button>
-      <div id="mensaje"></div>
-    </form>
-  </section>
+      <!-- Panel: Servicios (TODOS) -->
+      <div class="panel" id="servicios">
+        <div class="services" id="servicesGrid"></div>
+      </div>
+    </section>
 
-  <script>
-    function openTab(id) {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-    function preselectService(serv) {
-      openTab('reservar');
-      document.getElementById('servicio').value = serv;
-    }
+    <footer>© Deluxe Car Wash Valencia · Integración n8n Webhook</footer>
+  </div>
 
-    document.getElementById('formReserva').addEventListener('submit', async (e) => {
+<script>
+  // --------- Datos de servicios (9 en total)
+  const SERVICIOS = [
+    { nombre:"Lavado Exterior", duracion:"30 min", precio:"desde 20€", desc:"Lavado manual de carrocería, llantas y neumáticos; secado exterior." },
+    { nombre:"Lavado Interior", duracion:"30 min", precio:"desde 20€", desc:"Aspirado integral, plásticos y cristales interiores." },
+    { nombre:"Lavado Completo", duracion:"1 h", precio:"según tamaño", desc:"Exterior + interior; mantenimiento recomendado." },
+    { nombre:"Lavado con Cera", duracion:"1 h", precio:"según tamaño", desc:"Exterior completo y aplicación de cera protectora." },
+    { nombre:"Limpieza Deluxe", duracion:"1 h 30 min", precio:"según tamaño", desc:"Detailing interior minucioso y proceso exterior en 4 fases." },
+    { nombre:"Restauración de Faros", duracion:"2 h", precio:"desde 35€ / unidad", desc:"Lijado progresivo y pulido para recuperar la claridad." },
+    { nombre:"Limpieza de Tapicería", duracion:"4 h", precio:"desde 100€", desc:"Limpieza profunda de asientos, moquetas y paneles." },
+    { nombre:"Pulimento de Carrocería", duracion:"6 h", precio:"desde 280€", desc:"Pulido en varias etapas para renovar el brillo." },
+    { nombre:"Lavado de Motos", duracion:"30 min", precio:"desde 20€", desc:"Lavado exterior específico para moto; secado y acabado." }
+  ];
+
+  // Render tarjetas de servicios
+  const grid = document.getElementById('servicesGrid');
+  function renderServicios(){
+    grid.innerHTML = '';
+    SERVICIOS.forEach(s => {
+      const el = document.createElement('div');
+      el.className = 'svc';
+      el.innerHTML = `
+        <div class="body">
+          <h3>${s.nombre}</h3>
+          <div class="meta">
+            <span class="chip">Duración · ${s.duracion}</span>
+            <span class="chip">Precio · ${s.precio}</span>
+          </div>
+          <p>${s.desc}</p>
+          <div class="pick">
+            <button class="btn ghost" data-elige="${s.nombre}">Elegir y reservar</button>
+          </div>
+        </div>`;
+      grid.appendChild(el);
+    });
+    grid.querySelectorAll('[data-elige]').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.getElementById('servicio').value = btn.getAttribute('data-elige');
+        document.querySelector('[data-tab="reservar"]').click();
+        actualizarResumen();
+      });
+    });
+  }
+
+  // Tabs
+  document.querySelectorAll('.tabbar button').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.tabbar button').forEach(x=>x.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+      b.classList.add('active');
+      document.getElementById(b.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Resumen dinámico del servicio
+  function actualizarResumen(){
+    const val = document.getElementById('servicio').value;
+    const info = SERVICIOS.find(x=>x.nombre===val);
+    document.getElementById('resumenServicio').innerHTML =
+      info ? `Has seleccionado <b>${info.nombre}</b> · ${info.duracion} · <span class="chip">Precio: ${info.precio}</span>` : '';
+  }
+  document.getElementById('servicio').addEventListener('change', actualizarResumen);
+
+  // Validaciones estrictas de fecha/hora
+  const reFecha = /^\d{4}\/(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])$/;   // YYYY/MM/DD
+  const reHora  = /^([01]\d|2[0-3]):[0-5]\d$/;                           // HH:MM 24h
+
+  function validaFechaHora(fecha, hora){
+    if(!reFecha.test(fecha)) return {ok:false, msg:"Formato de fecha inválido. Usa YYYY/MM/DD."};
+    if(!reHora.test(hora))   return {ok:false, msg:"Formato de hora inválido. Usa HH:MM (24h)."};
+    return {ok:true};
+  }
+
+  // Enviar a n8n
+  (function(){
+    const form = document.getElementById('reservaForm');
+    const status = document.getElementById('status');
+    const WEBHOOK = 'https://gonxo14.app.n8n.cloud/webhook/carwash';
+
+    const show = (msg, ok=false)=>{ status.className='status show'; status.innerHTML = ok ? `<span class="ok">✅ ${msg}</span>` : `<span class="err">❌ ${msg}</span>`; };
+    const phone = v => (v||'').replace(/\D+/g,'');
+    const plate = v => (v||'').toUpperCase().replace(/\s+/g,'');
+
+    form.addEventListener('submit', async (e)=>{
       e.preventDefault();
       const data = {
-        nombre: document.getElementById('nombre').value,
-        telefono: document.getElementById('telefono').value.replace(/\D+/g, ''),
-        correo: document.getElementById('correo').value,
-        matricula: document.getElementById('matricula').value,
-        modelo: document.getElementById('modelo').value,
-        servicio_coche: document.getElementById('servicio').value,
-        fecha: document.getElementById('fecha').value,
-        hora: document.getElementById('hora').value,
-        servicio: "reserva"
+        nombre: (document.getElementById('nombre').value||'').trim(),
+        telefono: phone(document.getElementById('telefono').value),
+        correo: (document.getElementById('correo').value||'').trim(),
+        matricula: plate(document.getElementById('matricula').value),
+        modelo: (document.getElementById('modelo').value||'').trim(),
+        servicio_coche: (document.getElementById('servicio').value||'').trim(),
+        fecha: document.getElementById('fecha').value.trim(),   // YYYY/MM/DD
+        hora: document.getElementById('hora').value.trim(),     // HH:MM
+        servicio: 'reserva'
       };
-      try {
-        const resp = await fetch("https://gonxo14.app.n8n.cloud/webhook/carwash", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ body: data })
-        });
-        let txt = resp.ok ? "✅ Reserva enviada correctamente" : "❌ Error al enviar la reserva";
-        try { const j = await resp.json(); if (j && j.mensaje) txt += `\n${j.mensaje}`; } catch {}
-        document.getElementById("mensaje").innerText = txt;
-      } catch(err) {
-        document.getElementById("mensaje").innerText = "❌ Error de conexión";
+
+      if(!data.nombre || !data.telefono || !data.matricula || !data.modelo || !data.servicio_coche || !data.fecha || !data.hora){
+        return show('Revisa los campos obligatorios.', false);
+      }
+      const v = validaFechaHora(data.fecha, data.hora);
+      if(!v.ok) return show(v.msg, false);
+
+      try{
+        show('Enviando tu reserva…');
+        const res = await fetch(WEBHOOK, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ body: data }) });
+        const json = await res.json().catch(()=>({}));
+        if(res.ok){
+          show('Reserva enviada correctamente. Te confirmaremos por WhatsApp.', true);
+          form.reset(); document.getElementById('resumenServicio').innerHTML='';
+        }else{
+          show(json.mensaje || json.error || 'No se pudo procesar la reserva.', false);
+        }
+      }catch(err){
+        show('Error de conexión. Inténtalo de nuevo en unos segundos.', false);
       }
     });
-  </script>
+  })();
+
+  // Init
+  renderServicios();
+  actualizarResumen();
+</script>
 </body>
 </html>
